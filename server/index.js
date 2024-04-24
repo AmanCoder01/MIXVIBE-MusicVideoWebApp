@@ -13,7 +13,7 @@ dotenv.config();
 
 const localURL = "http://localhost:5173";
 
-const remoteURL = "https://mixvibe.vercel.app";
+const remoteURL = "http://mixvibe.vercel.app";
 
 const corsOption = {
     origin: remoteURL,
