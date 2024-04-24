@@ -35,7 +35,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/content", contentRoutes)
 
 
-
+app.get("/", (req, res) => {
+    const message = `Server is running `;
+    return res.status(200).send({ status: "success", message });
+});
 
 app.use((err, req, res, next) => {
     const status = err.status || 500;
