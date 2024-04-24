@@ -13,10 +13,10 @@ dotenv.config();
 
 const localURL = "http://localhost:5173";
 
-const remoteURL = "https://spotify-project-client.vercel.app";
+const remoteURL = "https://mixvibe.vercel.app";
 
 const corsOption = {
-    origin: localURL,
+    origin: remoteURL,
     methods: ['POST', 'GET', 'PUT', 'DELETE'],
     credentials: true,
     optionSuccessStatus: 200
