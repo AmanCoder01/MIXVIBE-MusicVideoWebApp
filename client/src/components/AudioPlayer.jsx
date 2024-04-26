@@ -131,12 +131,12 @@ const AudioPlayer = () => {
 
     return (
         <div className='flex items-center justify-between px-1 md:px-8 w-full'>
-            <div className='flex items-center gap-4 w-full max-w-[7rem] text-white'>
+            <div className='flex items-center gap-1  md:gap-4 w-full max-w-[7rem] text-white'>
                 <img src={episode[index]?.img} alt="" height={60} width={60} />
                 <p>{episode[index]?.name}</p>
             </div>
 
-            <div className='flex items-center gap-4 w-full max-w-lg'>
+            <div className='flex items-center gap-1 md:gap-4 w-full max-w-lg'>
                 <div className=''>
                     <BiSolidSkipPreviousCircle color='white' className='cursor-pointer' size={45} onClick={() => goToPreviousPodcast()} />
                 </div>
@@ -159,7 +159,7 @@ const AudioPlayer = () => {
             </div>
 
 
-            <div className='w-full max-w-[7rem] flex items-center gap-2 md:gap-4'>
+            <div className='w-full max-w-[7rem] hidden gap-2 md:gap-4  md:flex items-center'>
 
                 <HiVolumeUp size={29} color='white' />
                 <VolumeBar value={volume} onChange={handleVolumeChange} />

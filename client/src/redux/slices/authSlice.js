@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem('user')) : null,
     signupData: null,
+    sidebar: false
 }
 
 const authSlice = createSlice({
@@ -16,9 +17,13 @@ const authSlice = createSlice({
         setSignupData(state, value) {
             state.signupData = value.payload;
         },
+        setSidebar(state, value) {
+            state.sidebar = value.payload;
+        },
+
     }
 })
 
 
-export const { setUserProfile, setSignupData } = authSlice.actions;
+export const { setUserProfile, setSignupData, setSidebar } = authSlice.actions;
 export default authSlice.reducer;

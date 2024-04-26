@@ -1,16 +1,18 @@
 import React from 'react'
 import { IoMenuSharp } from "react-icons/io5";
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaUser } from "react-icons/fa";
+import { setSidebar } from '../redux/slices/authSlice';
 
 
 const Header = () => {
-    const { user } = useSelector((state) => state.auth);
+    const { user, sidebar } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
 
     return (
         <div className='w-full z-50 flex justify-between px-2 md:px-12 items-center py-[1rem]'>
-            <button>
+            <button onClick={() => dispatch(setSidebar(!sidebar))} className='block md:hidden'>
                 <IoMenuSharp size={28} />
             </button>
 

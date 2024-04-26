@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import { useSelector } from 'react-redux';
 import AudioPlayer from './AudioPlayer';
 
 const AppLayout = ({ children }) => {
+    const { sidebar } = useSelector(state => state.auth);
 
     return (
         <div className='w-full h-screen flex items-center text-white' >
-            <div className='h-full w-[20%] bg-[#15171E] hidden md:block'>
+            <div className={`h-full w-[60%] z-40 bg-[#15171E] md:w-[20%]  md:block  ${sidebar ? "absolute" : "hidden"} `}>
                 <Sidebar />
             </div>
 

@@ -89,12 +89,12 @@ const Dashboard = () => {
     return (
         <AppLayout>
             <div className='w-full h-full bg-[rgb(28,30,39)]  overflow-auto '>
-                <div className='p-16 mb-10'>
+                <div className='p-6 md:p-8 my-10'>
 
 
                     <div className='mb-12'>
                         <div className='flex items-center justify-between'>
-                            <h1 className='text-2xl font-bold'>Most Popular Songs</h1>
+                            <h1 className='text-xl md:text-2xl font-bold'>Most Popular Songs</h1>
                             <Link to="/showsong/mostpopular" className='text-lg text-[rgb(190,26,219)]'>Show More...</Link>
                         </div>
 
@@ -114,7 +114,7 @@ const Dashboard = () => {
 
                     <div className='mb-12 '>
                         <div className='flex items-center justify-between'>
-                            <h1 className='text-2xl font-bold'>Most Popular Videos</h1>
+                            <h1 className='text-xl md:text-2xl  font-bold'>Most Popular Videos</h1>
                             <Link to="/showvideo/mostpopular" className='text-lg text-[rgb(190,26,219)]'>Show More...</Link>
                         </div>
 

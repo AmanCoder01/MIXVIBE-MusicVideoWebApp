@@ -1,11 +1,24 @@
 import React from 'react'
 import { FaHeadphones } from 'react-icons/fa'
 import { FaPlay } from "react-icons/fa6";
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const DashCard = ({ index, data, handleOpenPlayer }) => {
+
+    const { openplayer } = useSelector(state => state.audioplayer);
+    const navigate = useNavigate();
+
+    const handleOpen = () => {
+        if (openplayer) {
+            handleOpenPlayer(data._id, data.type, index);
+        } else {
+            navigate("/signin");
+        }
+    }
     return (
-        <div key={index} className='bg-black p-4 group rounded-md relative cursor-pointer hover:-translate-y-2 transition-all duration-300' onClick={() => handleOpenPlayer(data._id, data.type, index)}>
+        <div key={index} className='bg-black p-4 group rounded-md relative cursor-pointer hover:-translate-y-2 transition-all duration-300' onClick={handleOpen}>
             <img src={data.img} alt="" className='w-full h-[160px] object-fill rounded-md' />
             <div className='pt-2'>
                 <h1 className='text-lg'>{data.name}</h1>
