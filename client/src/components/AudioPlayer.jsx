@@ -132,8 +132,8 @@ const AudioPlayer = () => {
     return (
         <div className='flex items-center justify-between px-1 md:px-8 w-full'>
             <div className='flex items-center gap-1  md:gap-4 w-full max-w-[7rem] text-white'>
-                <img src={episode[index]?.img} alt="" height={60} width={60} />
-                <p>{episode[index]?.name}</p>
+                <img src={episode[index]?.img} alt="" className='h-[45px] md:h-[55px] rounded-md ' />
+                <p className='text-sm md:text-lg'>{episode[index]?.name.split(" ").slice(0, 2).join(" ")}</p>
             </div>
 
             <div className='flex items-center gap-1 md:gap-4 w-full max-w-lg'>

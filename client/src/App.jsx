@@ -60,7 +60,7 @@ function App() {
           </Routes>
 
           {openplayer && type === "audio" &&
-            <div className='fixed bottom-0 w-full bg-black h-[70px] p-2 z-50'>
+            <div className='fixed bottom-0 w-full bg-black h-[65px] p-2 z-50'>
               <AudioPlayer />
             </div>
           }

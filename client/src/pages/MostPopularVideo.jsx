@@ -80,9 +80,9 @@ const MostPopularVideo = () => {
     return (
         <AppLayout>
             <div className='w-full h-full bg-[rgb(28,30,39)]  overflow-auto '>
-                <div className='p-16 mb-10'>
+                <div className='p-6 md:p-8 my-10'>
                     <h1 className='text-2xl font-bold'>Most Popular Songs</h1>
-                    <div className='grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
+                    <div className=' px-4 grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
                         {
                             mostPopularVideo?.map((data, index) => (
                                 <DashCard key={index} index={index} data={data} handleOpenPlayer={handleOpenPlayer} />

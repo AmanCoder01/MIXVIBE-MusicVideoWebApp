@@ -12,29 +12,40 @@ import { Link } from 'react-router-dom';
 const Dashboard = () => {
     const [mostPopular, setMostPopular] = useState([]);
     const [mostPopularVideo, setMostPopularVideo] = useState([]);
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
     const getPopularPodcast = async () => {
+        setLoading(true);
+
         try {
             const res = await axios.get(`${server}/content/mostpopular`, { withCredentials: true });
             // console.log(res);
             if (res.status === 200) {
                 setMostPopular(res.data);
+                setLoading(false);
+
             }
         } catch (err) {
             console.log(err);
+            setLoading(false);
+
         }
     }
 
     const getPopularVideo = async () => {
+        setLoading(true);
         try {
             const res = await axios.get(`${server}/content/mostpopularvideo`, { withCredentials: true });
             // console.log(res);
             if (res.status === 200) {
                 setMostPopularVideo(res.data);
+                setLoading(false);
             }
         } catch (err) {
             console.log(err);
+            setLoading(false);
+
         }
     }
 
@@ -98,14 +109,18 @@ const Dashboard = () => {
                             <Link to="/showsong/mostpopular" className='text-lg text-[rgb(190,26,219)]'>Show More...</Link>
                         </div>
 
-                        <div className='grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
-                            {
-                                mostPopular?.slice(0, 9).map((data, index) => (
-                                    <DashCard index={index} key={index} data={data} handleOpenPlayer={handleOpenPlayer} />
-                                )
+                        {
+                            loading ? <span className="loader mx-auto w-full flex justify-center items-center my-12"></span> :
+                                mostPopular?.length === 0 ? <h1 className='my-8 text-center text-xl'>Songs not Available</h1> :
 
-                                )}
-                        </div>
+                                    <div className='px-4 grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
+                                        {
+                                            mostPopular?.slice(0, 8).map((data, index) => {
+                                                return <DashCard index={index} key={index} data={data} handleOpenPlayer={handleOpenPlayer} />
+                                            })
+                                        }
+                                    </div>
+                        }
                     </div>
 
 
@@ -117,14 +132,18 @@ const Dashboard = () => {
                             <h1 className='text-xl md:text-2xl  font-bold'>Most Popular Videos</h1>
                             <Link to="/showvideo/mostpopular" className='text-lg text-[rgb(190,26,219)]'>Show More...</Link>
                         </div>
+                        {
+                            loading ? <span className="loader mx-auto w-full flex justify-center items-center my-12"></span> :
+                                mostPopularVideo?.length === 0 ? <h1 className='my-8 text-xl text-center'>Videos Not Available..</h1> :
 
-                        <div className='grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
-                            {
-                                mostPopularVideo?.slice(0, 9).map((data, index) => (
-                                    <DashCard index={index} key={index} data={data} handleOpenPlayer={handleOpenPlayer} />
-                                )
-                                )}
-                        </div>
+                                    <div className='grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
+                                        {
+                                            mostPopularVideo?.slice(0, 8).map((data, index) => {
+                                                return <DashCard index={index} key={index} data={data} handleOpenPlayer={handleOpenPlayer} />
+                                            })
+                                        }
+                                    </div>
+                        }
                     </div>
 
 
