@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router-dom';
 
 const DashCard = ({ index, data, handleOpenPlayer }) => {
 
-    const { openplayer } = useSelector(state => state.audioplayer);
+    const { user } = useSelector(state => state.auth);
     const navigate = useNavigate();
 
     const handleOpen = () => {
-        if (openplayer) {
+        if (user) {
             handleOpenPlayer(data._id, data.type, index);
         } else {
             navigate("/signin");

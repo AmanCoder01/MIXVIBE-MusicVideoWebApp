@@ -16,7 +16,7 @@ const localURL = "http://localhost:5173";
 const remoteURL = "https://mixvibe.vercel.app";
 
 const corsOption = {
-    origin: remoteURL,
+    origin: localURL,
     methods: ['POST', 'GET', 'PUT', 'DELETE'],
     credentials: true,
     optionSuccessStatus: 200
