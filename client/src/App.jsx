@@ -17,6 +17,7 @@ import AdminPrivate from "./components/AdminPrivate";
 import MostPopularVideo from "./pages/MostPopularVideo";
 import { Modal } from "@mui/material";
 import VideoPlayer from "./components/VideoPlayer";
+import Search from "./pages/Search";
 
 
 const Container = styled.div`
@@ -49,13 +50,14 @@ function App() {
                 <Upload />
               </AdminPrivate>
             } />
-            <Route path="/profile" element={
+            <Route path="/profile/:id" element={
               <PrivateRoute>
                 <Profile />
               </PrivateRoute>
             } />
             <Route path="/showsong/mostpopular" element={<MostPopularSong />} />
             <Route path="/showvideo/mostpopular" element={<MostPopularVideo />} />
+            <Route path="/search" element={<Search />} />
 
           </Routes>
 

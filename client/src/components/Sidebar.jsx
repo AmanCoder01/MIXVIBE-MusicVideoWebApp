@@ -7,7 +7,7 @@ import { MdCloudUpload } from "react-icons/md";
 import { IoLogOutOutline } from "react-icons/io5";
 import axios from "axios";
 import { server } from "../service/server"
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 import { setUserProfile } from '../redux/slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +18,7 @@ const Sidebar = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const path = useLocation().pathname;
 
     const { user } = useSelector(state => state.auth);
     const handleLogout = async () => {
@@ -53,19 +54,19 @@ const Sidebar = () => {
                 MIXVIBE</Link>
 
             <div className='flex flex-col justify-center'>
-                <Link to="/" className='hover:bg-gray-700 w-full py-4 text-lg  cursor-pointer'>
+                <Link to="/" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/" && "bg-gray-800"}`}>
                     <div className='px-4 flex items-center gap-4'>
                         <MdHome size={24} />
                         <p>Dashboard</p>
                     </div>
                 </Link>
-                <div className='hover:bg-gray-700  w-full py-4 text-lg  cursor-pointer'>
+                <Link to="/search" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/search" && "bg-gray-800"}`}>
                     <div className='px-4 flex items-center gap-4'>
                         <IoSearchSharp size={24} />
                         Search
                     </div>
-                </div>
-                <div className='hover:bg-gray-700  w-full py-4 text-lg  cursor-pointer'>
+                </Link>
+                <div className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/favourites" && "bg-gray-800"}`}>
                     <div className='px-4 flex items-center gap-4'>
                         <FaHeart size={20} />
                         Favourites
@@ -76,7 +77,7 @@ const Sidebar = () => {
 
                 <div className='h-0 w-full border my-4 border-[rgba(177,178,179,0.314)]'></div>
 
-                {user?.isAdmin && <Link to="/upload" className='hover:bg-gray-700  w-full py-4 text-lg  cursor-pointer'>
+                {user?.isAdmin && <Link to="/upload" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/upload" && "bg-gray-800"}`}>
                     <div className='px-4 flex items-center gap-4'>
                         <MdCloudUpload size={24} />
                         Upload

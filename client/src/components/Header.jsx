@@ -21,7 +21,7 @@ const Header = () => {
             <div>
                 {
                     user ? (
-                        <Link to="/profile">
+                        <Link to={`/profile/${user._id}`}>
                             <img src={user.img} width={36} height={36} className='rounded-full' alt="" />
                         </Link>
                     ) :

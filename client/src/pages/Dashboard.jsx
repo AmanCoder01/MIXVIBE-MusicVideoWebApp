@@ -127,7 +127,7 @@ const Dashboard = () => {
 
 
 
-                    <div className='mb-12 '>
+                    <div className='mb-12'>
                         <div className='flex items-center justify-between'>
                             <h1 className='text-xl md:text-2xl  font-bold'>Most Popular Videos</h1>
                             <Link to="/showvideo/mostpopular" className='text-lg text-[rgb(190,26,219)]'>Show More...</Link>
