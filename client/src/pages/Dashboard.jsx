@@ -111,7 +111,7 @@ const Dashboard = () => {
 
                         {
                             loading ? <span className="loader mx-auto w-full flex justify-center items-center my-12"></span> :
-                                mostPopular?.length === 0 ? <h1 className='my-8 text-center text-xl'>Songs not Available</h1> :
+                                mostPopular?.length === 0 && !loading ? <h1 className='my-8 text-center text-xl'>Songs not Available</h1> :
 
                                     <div className='px-4 grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
                                         {
@@ -134,7 +134,7 @@ const Dashboard = () => {
                         </div>
                         {
                             loading ? <span className="loader mx-auto w-full flex justify-center items-center my-12"></span> :
-                                mostPopularVideo?.length === 0 ? <h1 className='my-8 text-xl text-center'>Videos Not Available..</h1> :
+                                mostPopularVideo?.length === 0 && !loading ? <h1 className='my-8 text-xl text-center'>Videos Not Available..</h1> :
 
                                     <div className='grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
                                         {
