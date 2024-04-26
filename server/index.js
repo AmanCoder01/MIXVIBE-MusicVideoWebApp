@@ -36,7 +36,7 @@ app.use("/api/content", contentRoutes)
 
 
 app.get("/", (req, res) => {
-    const message = `Server is running `;
+    const message = `Server running on port ${process.env.PORT}`;
     return res.status(200).send({ status: "success", message });
 });
 
