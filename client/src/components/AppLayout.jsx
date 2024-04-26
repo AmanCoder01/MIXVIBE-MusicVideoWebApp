@@ -9,7 +9,7 @@ const AppLayout = ({ children }) => {
 
     return (
         <div className='w-full h-screen flex items-center text-white' >
-            <div className={`h-full w-[60%] z-40 bg-[#15171E] md:w-[20%]  md:block  ${sidebar ? "absolute" : "hidden"} `}>
+            <div className={`h-full w-[60%] z-40 bg-[#15171E] md:w-[20%]  md:block  ${sidebar ? "absolute top-[3.6rem]" : "hidden"} `}>
                 <Sidebar />
             </div>
 
