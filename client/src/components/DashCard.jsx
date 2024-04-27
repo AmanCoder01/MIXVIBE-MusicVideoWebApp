@@ -26,7 +26,7 @@ const DashCard = ({ index, data, handleOpenPlayer }) => {
             </div>
             <div className='pt-3 flex items-center justify-between'>
                 <div className='flex items-center gap-2'>
-                    <img src={data.creator.img} height={30} width={30} className='rounded-full' alt="" />
+                    <img src={data.creator.img} height={28} width={28} className='rounded-full' alt="" />
                     <h1>{data.creator.name}</h1>
                 </div>
 

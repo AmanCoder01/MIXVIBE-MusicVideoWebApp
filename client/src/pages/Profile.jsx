@@ -7,22 +7,29 @@ import { server } from '../service/server';
 import toast from 'react-hot-toast';
 import { MdDelete } from "react-icons/md";
 import moment from "moment";
+import { RxCross2 } from "react-icons/rx";
+
 
 
 const Profile = () => {
 
     const { user } = useSelector(state => state.auth);
     const { id } = useParams();
-    const [contentData, seContentData] = useState([]);
+    const [contentData, setContentData] = useState([]);
+    const [modal, setModal] = useState({
+        isOpen: false,
+        id: ""
+    });
+
 
 
     const fetchData = async () => {
         try {
             const res = await axios.get(`${server}/profile/${id}`, { withCredentials: true });
-            console.log(res);
+            // console.log(res);
 
             if (res.status === 200) {
-                seContentData(res.data);
+                setContentData(res.data);
             } else {
                 toast.error(res.data.message);
             }
@@ -38,10 +45,25 @@ const Profile = () => {
 
 
 
+    const handleConfirm = async (id) => {
+        try {
+            const res = await axios.delete(`${server}/profile/delete/${id}`, { withCredentials: true });
+
+            setContentData(contentData.filter((item) => item._id !== id));
+            setModal({ isOpen: false, id: '' })
+            toast.success(res.data.message);
+
+        } catch (error) {
+            setModal({ isOpen: false, id: '' })
+            console.log(error);
+        }
+    }
+
+
 
     return (
         <AppLayout>
-            <div className='w-full h-full bg-[rgb(28,30,39)]  overflow-auto '>
+            <div className={`w-full h-full bg-[rgb(28,30,39)]  overflow-auto  relative ${modal?.isOpen && "bg-opacity-20 overflow-hidden"}`}>
                 <div className='p-6 md:p-8 my-10'>
                     <div className='flex items-center gap-6 flex-wrap'>
                         <img src={user?.img} alt="" className='h-[150px] rounded-full' />
@@ -76,13 +98,41 @@ const Profile = () => {
                                             </div>
 
                                             <div className='cursor-pointer flex flex-col items-center gap-4 py-2'>
-                                                <MdDelete size={25} />
+                                                <MdDelete size={25} onClick={() => setModal({
+                                                    isOpen: true,
+                                                    id: item?._id
+                                                })} />
                                                 <span className='text-[0.7rem] md:text-sm'>{moment(item?.createdAt).fromNow()}</span>
                                             </div>
+
                                         </div>
                                     })
                             }
                         </div>
+
+
+                        {modal?.isOpen &&
+                            <div className='absolute left-0 right-0 mx-auto  top-[12rem] max-w-sm w-full bg-black h-[180px] p-4 rounded-xl z-50'>
+                                <div className='flex justify-end cursor-pointer w-full text-right' onClick={() => setModal({
+                                    isOpen: false,
+                                    id: ""
+                                })}>
+                                    <RxCross2 color='white' size={24} />
+                                </div>
+                                <div className='px-6'>
+                                    <h1 className='my-6 text-lg font-normal' >Are  you sure ,You want to delete?</h1>
+
+                                    <div className='flex items-center justify-between'>
+                                        <button className='bg-[rgb(190,26,219)] py-1 px-2 rounded-md' onClick={() => setModal({
+                                            isOpen: false,
+                                            id: ""
+                                        })}>Cancel</button>
+                                        <button className='bg-[rgb(190,26,219)] py-1 px-2 rounded-md' onClick={() => handleConfirm(modal.id)}>Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
                     </div>
                 </div>
             </div>

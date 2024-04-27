@@ -100,20 +100,20 @@ const Dashboard = () => {
     return (
         <AppLayout>
             <div className='w-full h-full bg-[rgb(28,30,39)]  overflow-auto '>
-                <div className='p-6 md:p-8 my-10'>
+                <div className='py-6 md:py-9 px-7 md:px-12 my-6'>
 
 
                     <div className='mb-12'>
                         <div className='flex items-center justify-between'>
-                            <h1 className='text-xl md:text-2xl font-bold'>Most Popular Songs</h1>
-                            <Link to="/showsong/mostpopular" className='text-lg text-[rgb(190,26,219)]'>Show More...</Link>
+                            <h1 className='text-xl md:text-xl font-bold'>Most Popular Songs</h1>
+                            <Link to="/showsong/mostpopular" className='text-lg text-[rgb(190,26,219)]'>Show all...</Link>
                         </div>
 
                         {
-                            loading ? <span className="loader mx-auto w-full flex justify-center items-center my-12"></span> :
+                            loading ? <span className="loader h-screen   mx-auto w-full flex justify-center items-center my-12"></span> :
                                 mostPopular?.length === 0 && !loading ? <h1 className='my-8 text-center text-xl'>Songs not Available</h1> :
 
-                                    <div className='px-4 grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
+                                    <div className=' grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
                                         {
                                             mostPopular?.slice(0, 8).map((data, index) => {
                                                 return <DashCard index={index} key={index} data={data} handleOpenPlayer={handleOpenPlayer} />
@@ -129,8 +129,8 @@ const Dashboard = () => {
 
                     <div className='mb-12'>
                         <div className='flex items-center justify-between'>
-                            <h1 className='text-xl md:text-2xl  font-bold'>Most Popular Videos</h1>
-                            <Link to="/showvideo/mostpopular" className='text-lg text-[rgb(190,26,219)]'>Show More...</Link>
+                            <h1 className='text-xl md:text-xl  font-bold'>Most Popular Videos</h1>
+                            <Link to="/showvideo/mostpopular" className='text-lg text-[rgb(190,26,219)]'>Show all...</Link>
                         </div>
                         {
                             loading ? <span className="loader mx-auto w-full flex justify-center items-center my-12"></span> :

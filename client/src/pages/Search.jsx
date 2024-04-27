@@ -13,7 +13,7 @@ const Search = () => {
                 <div className='py-6 md:py-8 px-7 md:px-12 my-6'>
                     <div className='max-w-3xl w-full relative flex justify-center mx-auto'>
                         <input type="text" placeholder='Search Song / Videos'
-                            className='w-full  bg-inherit rounded-3xl pr-4 pl-12 border p-3'
+                            className='w-full  bg-inherit rounded-3xl pr-4 pl-12 border p-3 outline-none'
                         />
                         <div className='absolute top-4 left-[1rem]'>
                             <FaSearch />
@@ -27,7 +27,7 @@ const Search = () => {
 
                         <h1 className='text-xl   font-semibold'>Browse All</h1>
 
-                        <div className='flex flex-wrap gap-6 mt-6 mx-auto  items-center'>
+                        <div className='flex flex-wrap gap-6 mt-6 mx-auto  items-center overflow-hidden'>
                             {SongCategory.map((category, index) => (
                                 <Link to={`/showsongs/${category.name.toLowerCase()}`} key={index} style={{ textDecoration: "none" }}>
                                     <DefaultCard category={category} />

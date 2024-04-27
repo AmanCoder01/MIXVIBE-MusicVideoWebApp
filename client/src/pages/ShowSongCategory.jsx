@@ -79,7 +79,7 @@ const ShowSongCategory = () => {
     return (
         <AppLayout>
             <div className='w-full h-full bg-[rgb(28,30,39)]  overflow-auto '>
-                <div className='py-6 md:py-8 px-7 md:px-12 my-6 mb-14'>
+                <div className='py-6 md:py-9 px-7 md:px-12 my-6 mb-14'>
                     <h1 className='text-xl font-semibold'>{category.toUpperCase()}</h1>
 
                     <div className=' grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>

@@ -19,6 +19,7 @@ import { Modal } from "@mui/material";
 import VideoPlayer from "./components/VideoPlayer";
 import Search from "./pages/Search";
 import ShowSongCategory from "./pages/ShowSongCategory";
+import Favourites from "./pages/Favourites";
 
 
 const Container = styled.div`
@@ -59,6 +60,7 @@ function App() {
             <Route path="/showsong/mostpopular" element={<MostPopularSong />} />
             <Route path="/showvideo/mostpopular" element={<MostPopularVideo />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/favourites" element={<Favourites />} />
             <Route path="/showsongs/:category" element={<ShowSongCategory />} />
 
           </Routes>

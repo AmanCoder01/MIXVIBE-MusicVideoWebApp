@@ -66,12 +66,12 @@ const Sidebar = () => {
                         Search
                     </div>
                 </Link>
-                <div className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/favourites" && "bg-gray-800"}`}>
+                <Link to="/favourites" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/favourites" && "bg-gray-800"}`}>
                     <div className='px-4 flex items-center gap-4'>
                         <FaHeart size={20} />
                         Favourites
                     </div>
-                </div>
+                </Link>
 
 
 
