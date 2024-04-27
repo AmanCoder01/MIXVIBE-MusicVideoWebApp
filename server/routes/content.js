@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyToken } from "../middlewares/AuthMiddleware.js";
-import { addView, createContent, getContentById, getContents, mostpopular, mostpopularVideos } from "../controllers/content.controller.js";
+import { addView, createContent, getByCategory, getContentById, getContents, mostpopular, mostpopularVideos } from "../controllers/content.controller.js";
 
 
 const router = express.Router();
@@ -30,7 +30,7 @@ router.get("/mostpopular", mostpopular)
 router.get("/mostpopularvideo", mostpopularVideos)
 // router.get("/random", random)
 // router.get("/tags", getByTag)
-// router.get("/category", getByCategory)
+router.get("/category/:category", getByCategory)
 // router.get("/search", search)
 
 

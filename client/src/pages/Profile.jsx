@@ -65,19 +65,19 @@ const Profile = () => {
                                 contentData?.length === 0 ?
                                     <span className="text-white text-center">No uploads yet!</span> :
                                     contentData?.map((item, index) => {
-                                        return <div key={index} className='flex gap-4 bg-black p-2 px-4 rounded-md justify-between'>
+                                        return <div key={index} className='flex gap-4 bg-black p-2 px-4 rounded-md justify-between max-h-[100px]'>
                                             <div className='flex gap-4'>
-                                                <img src={item?.img} alt="" className='h-[50px] w-[50px] md:h-[80px] md:w-[80px] rounded-md' />
+                                                <img src={item?.img} alt="" className='h-full w-[50px] md:h-[80px] md:w-[80px] rounded-md' />
                                                 <div className='flex flex-col justify-center '>
-                                                    <h1 className='text-lg md:text-xl'>{item?.name}</h1>
-                                                    <h1 className='text-sm md:text-md'>{item?.desc}</h1>
-                                                    <span className='text-sm text-gray-300'>Views: {item?.views}</span>
+                                                    <h1 className='text-lg md:text-xl'>{item?.name.slice(0, 10)}...</h1>
+                                                    <h1 className='text-sm md:text-md'>{item?.desc.slice(0, 10)}</h1>
+                                                    <span className='text-[0.7rem] md:text-sm text-gray-300'>Views: {item?.views}</span>
                                                 </div>
                                             </div>
 
-                                            <div className='cursor-pointer flex flex-col items-center gap-4'>
+                                            <div className='cursor-pointer flex flex-col items-center gap-4 py-2'>
                                                 <MdDelete size={25} />
-                                                <span className='text-sm'>{moment(item?.createdAt).fromNow()}</span>
+                                                <span className='text-[0.7rem] md:text-sm'>{moment(item?.createdAt).fromNow()}</span>
                                             </div>
                                         </div>
                                     })

@@ -64,6 +64,20 @@ export const getContentById = async (req, res, next) => {
 };
 
 
+export const getByCategory = async (req, res, next) => {
+    try {
+        const { category } = req.params;
+
+        const content = await Content.find({
+            category: { $regex: category, $options: "i" },
+        }).populate("creator", "name img");
+        return res.status(200).json(content);
+    } catch (err) {
+        next(err);
+    }
+};
+
+
 
 export const addView = async (req, res, next) => {
     try {

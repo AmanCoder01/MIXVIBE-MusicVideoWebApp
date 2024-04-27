@@ -86,13 +86,13 @@ export const SongCategory = [
     },
     {
         name: "Bhajans",
-        img: "https://m.media-amazon.com/images/M/MV5BMjNjYjJkYTYtYjI5Zi00NWE4LWFiZjItMjM0N2VlZjgxY2U0XkEyXkFqcGdeQXVyNzg3NjQyOQ@@._V1_.jpg",
-        color: "#62bf62"
+        img: "https://imgv2-1-f.scribdassets.com/img/document/251844076/original/7a810f25fa/1713328311?v=1",
+        color: "#74d0d6"
     },
     {
         name: "Haryanvi",
-        img: "https://m.media-amazon.com/images/M/MV5BMjNjYjJkYTYtYjI5Zi00NWE4LWFiZjItMjM0N2VlZjgxY2U0XkEyXkFqcGdeQXVyNzg3NjQyOQ@@._V1_.jpg",
-        color: "#62bf62"
+        img: "https://images.squarespace-cdn.com/content/v1/5b6a11479f87707f6722bd01/1541786848970-Y0SCCZBCEY6OAE790VFB/MFM.jpg?format=1000w",
+        color: "#6c4bb8"
     },
 
 ]
