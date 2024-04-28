@@ -16,6 +16,7 @@ const Profile = () => {
     const { user } = useSelector(state => state.auth);
     const { id } = useParams();
     const [contentData, setContentData] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [modal, setModal] = useState({
         isOpen: false,
         id: ""
@@ -24,17 +25,21 @@ const Profile = () => {
 
 
     const fetchData = async () => {
+        setLoading(true);
         try {
             const res = await axios.get(`${server}/profile/${id}`, { withCredentials: true });
-            // console.log(res);
 
             if (res.status === 200) {
-                setContentData(res.data);
+                setLoading(false);
+                setContentData(res.data.contents);
             } else {
                 toast.error(res.data.message);
+                setLoading(false);
+
             }
         } catch (err) {
             console.log('Error: ', err)
+            setLoading(false);
         }
     }
 
@@ -47,7 +52,7 @@ const Profile = () => {
 
     const handleConfirm = async (id) => {
         try {
-            const res = await axios.delete(`${server}/profile/delete/${id}`, { withCredentials: true });
+            const res = await axios.delete(`${server}/content/delete/${id}`, { withCredentials: true });
 
             setContentData(contentData.filter((item) => item._id !== id));
             setModal({ isOpen: false, id: '' })
@@ -83,7 +88,7 @@ const Profile = () => {
 
 
                         <div className='my-8 flex flex-col gap-4'>
-                            {
+                            {loading ? <p className="loader    mx-auto w-full flex justify-center items-center my-12"></p> :
                                 contentData?.length === 0 ?
                                     <span className="text-white text-center">No uploads yet!</span> :
                                     contentData?.map((item, index) => {

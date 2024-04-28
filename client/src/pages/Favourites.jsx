@@ -3,9 +3,11 @@ import AppLayout from '../components/AppLayout'
 import DashCard from '../components/DashCard'
 import axios from 'axios';
 import { server } from '../service/server';
+import { useSelector } from 'react-redux';
 
 const Favourites = () => {
     const [userData, setUserData] = useState();
+    const { user } = useSelector((state) => state.auth);
 
 
 
@@ -53,7 +55,7 @@ const Favourites = () => {
 
     const getUser = async () => {
         try {
-            const res = await axios.get(`${server}/profile/`, { withCredentials: true });
+            const res = await axios.get(`${server}/profile/${user._id}`, { withCredentials: true });
             console.log(res);
             setUserData(res.data)
 

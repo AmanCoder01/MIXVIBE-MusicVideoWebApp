@@ -38,33 +38,6 @@ export const createContent = async (req, res, next) => {
 };
 
 
-
-
-
-
-export const getContents = async (req, res, next) => {
-    try {
-        // Get all content from the database
-        const content = await Content.find({ type: "audio" }).populate("creator", "name img");
-        return res.status(200).json(content);
-    } catch (err) {
-        next(err);
-    }
-};
-
-
-
-export const getContentById = async (req, res, next) => {
-    try {
-        // Get the podcasts from the database
-        const content = await Content.findById(req.params.id).populate("creator", "name img");
-        return res.status(200).json(content);
-    } catch (err) {
-        next(err);
-    }
-};
-
-
 export const getByCategory = async (req, res, next) => {
     try {
         const { category } = req.params;
@@ -77,8 +50,6 @@ export const getByCategory = async (req, res, next) => {
         next(err);
     }
 };
-
-
 
 
 export const favoritContent = async (req, res, next) => {
@@ -127,7 +98,6 @@ export const favoritContent = async (req, res, next) => {
 }
 
 
-
 export const addView = async (req, res, next) => {
     try {
         await Content.findByIdAndUpdate(req.params.id, {
@@ -140,9 +110,7 @@ export const addView = async (req, res, next) => {
 };
 
 
-
-
-export const mostpopular = async (req, res, next) => {
+export const mostpopularSongs = async (req, res, next) => {
     try {
         const content = await Content.find({ type: "audio" }).sort({ views: -1 }).populate("creator", "name img");
         res.status(200).json(content);
@@ -160,3 +128,29 @@ export const mostpopularVideos = async (req, res, next) => {
         next(err);
     }
 };
+
+
+
+export const deleteRecentPostById = async (req, res, next) => {
+
+    const { id } = req.params;
+
+    if (!req.user.id) {
+        return res.status(401).send({ message: 'Unauthorized' });
+    }
+
+    try {
+        const contents = await Content.findByIdAndDelete(id);
+        if (!contents) return res.status(404).send({ message: 'No data' });
+
+        const updatedUser = await User.findByIdAndUpdate(req.user.id, {
+            $pull: { contents: id },
+        }, { new: true });
+
+        return res.status(200).send({ message: "Content deleted !" });
+
+    } catch (error) {
+        next(error);
+    }
+
+}

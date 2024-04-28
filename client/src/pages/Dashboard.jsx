@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AppLayout from '../components/AppLayout'
 import axios from 'axios'
 import { server } from '../service/server'
-import { FaHeadphones } from "react-icons/fa6";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openPlayer } from '../redux/slices/audioPlayerSlice';
 import DashCard from '../components/DashCard';
 import { Link } from 'react-router-dom';
@@ -14,23 +13,21 @@ const Dashboard = () => {
     const [mostPopularVideo, setMostPopularVideo] = useState([]);
     const [userData, setUserData] = useState();
     const [loading, setLoading] = useState(false);
+    const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
-    const getPopularPodcast = async () => {
+    const getPopularSong = async () => {
         setLoading(true);
 
         try {
-            const res = await axios.get(`${server}/content/mostpopular`, { withCredentials: true });
-            // console.log(res);
+            const res = await axios.get(`${server}/content/mostpopularsong`, { withCredentials: true });
             if (res.status === 200) {
                 setMostPopular(res.data);
                 setLoading(false);
-
             }
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             setLoading(false);
-
         }
     }
 
@@ -44,25 +41,32 @@ const Dashboard = () => {
                 setLoading(false);
             }
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             setLoading(false);
+        }
+    }
 
+    const getUser = async () => {
+        try {
+            const res = await axios.get(`${server}/profile/${user?._id}`, { withCredentials: true });
+            if (res.status == 200) {
+                setUserData(res.data);
+            }
+        } catch (err) {
+            console.log(err);
         }
     }
 
     useEffect(() => {
-        getPopularPodcast();
+        getPopularSong();
         getPopularVideo();
         getUser();
-
     }, [])
 
 
     const addviewtToPodcast = async (id) => {
         try {
             const res = await axios.post(`${server}/content/addview/${id}`, { withCredentials: true });
-
-            // console.log(res);
 
         } catch (error) {
             console.log(error);
@@ -101,16 +105,6 @@ const Dashboard = () => {
 
 
 
-    const getUser = async () => {
-        try {
-            const res = await axios.get(`${server}/profile/`, { withCredentials: true });
-            console.log(res);
-            setUserData(res.data)
-
-        } catch (err) {
-            console.log(err);
-        }
-    }
 
 
     return (
@@ -126,7 +120,7 @@ const Dashboard = () => {
                         </div>
 
                         {
-                            loading ? <span className="loader h-screen   mx-auto w-full flex justify-center items-center my-12"></span> :
+                            loading ? <p className="loader    mx-auto w-full flex justify-center items-center my-12"></p> :
                                 mostPopular?.length === 0 && !loading ? <h1 className='my-8 text-center text-xl'>Songs not Available</h1> :
 
                                     <div className=' grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
@@ -161,8 +155,6 @@ const Dashboard = () => {
                                     </div>
                         }
                     </div>
-
-
 
 
                 </div>
