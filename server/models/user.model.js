@@ -27,12 +27,12 @@ const userSchema = new mongoose.Schema({
     },
     contents: {
         type: [mongoose.Schema.Types.ObjectId],
-        ref: "Contents",
+        ref: "Content",
         default: [],
     },
-    favorits: {
+    favorites: {
         type: [mongoose.Schema.Types.ObjectId],
-        ref: "Podcasts",
+        ref: "Content",
         default: [],
     },
     isAdmin: {

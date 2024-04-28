@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 const Dashboard = () => {
     const [mostPopular, setMostPopular] = useState([]);
     const [mostPopularVideo, setMostPopularVideo] = useState([]);
+    const [userData, setUserData] = useState();
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
@@ -52,6 +53,8 @@ const Dashboard = () => {
     useEffect(() => {
         getPopularPodcast();
         getPopularVideo();
+        getUser();
+
     }, [])
 
 
@@ -97,6 +100,19 @@ const Dashboard = () => {
     }
 
 
+
+    const getUser = async () => {
+        try {
+            const res = await axios.get(`${server}/profile/`, { withCredentials: true });
+            console.log(res);
+            setUserData(res.data)
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
     return (
         <AppLayout>
             <div className='w-full h-full bg-[rgb(28,30,39)]  overflow-auto '>
@@ -116,7 +132,7 @@ const Dashboard = () => {
                                     <div className=' grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
                                         {
                                             mostPopular?.slice(0, 8).map((data, index) => {
-                                                return <DashCard index={index} key={index} data={data} handleOpenPlayer={handleOpenPlayer} />
+                                                return <DashCard index={index} key={index} userData={userData} data={data} handleOpenPlayer={handleOpenPlayer} />
                                             })
                                         }
                                     </div>

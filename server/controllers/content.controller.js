@@ -1,5 +1,6 @@
 import { User } from "../models/user.model.js";
 import { Content } from "../models/content.model.js";
+import { createError } from "../middlewares/error.js";
 
 
 
@@ -76,6 +77,54 @@ export const getByCategory = async (req, res, next) => {
         next(err);
     }
 };
+
+
+
+
+export const favoritContent = async (req, res, next) => {
+
+    if (!req.user.id) {
+        return res.status(401).send('User not logged in');
+    }
+
+    const user = await User.findById(req.user.id);
+
+    const content = await Content.findById(req.body.id);
+
+
+    if (user.id === content.creator.toString()) {
+        return next(createError(403, "You can't favorit your own content!"));
+    }
+
+    let found = false;
+
+
+    // Check if the content is already in the user's favorits
+    await Promise.all(user.favorites.map(async (item) => {
+        if (req.body.id == item) {
+            //remove from favorite
+            found = true;
+            // console.log("this")
+            await User.findByIdAndUpdate(user.id, {
+                $pull: { favorites: req.body.id },
+
+            }, { new: true })
+            res.status(200).json({ like: false, message: "Removed from favorite" });
+        }
+    }));
+
+
+
+
+
+    if (!found) {
+        await User.findByIdAndUpdate(user.id, {
+            $push: { favorites: req.body.id },
+
+        }, { new: true });
+        res.status(200).json({ like: true, message: "Added to favorite" });
+    }
+}
 
 
 

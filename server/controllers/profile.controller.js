@@ -26,6 +26,37 @@ export const getUserData = async (req, res, next) => {
 
 
 
+export const profileData = async (req, res, next) => {
+
+    if (!req.user.id) {
+        return res.status(403).send({ message: "You are not logged in!" })
+    }
+    try {
+        const user = await User.findById(req.user.id).populate({
+            path: "contents",
+            populate: {
+                path: "creator",
+                select: "name img",
+            }
+        }
+        ).populate(
+            {
+                path: "favorites",
+                populate: {
+                    path: "creator",
+                    select: "name img",
+                }
+            }
+        );
+        return res.status(200).json(user);
+    } catch (err) {
+        console.log(err)
+        next(err);
+    }
+}
+
+
+
 export const deleteRecentPostById = async (req, res, next) => {
 
     const { id } = req.params;

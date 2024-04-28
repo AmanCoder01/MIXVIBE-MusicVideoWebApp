@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 const MostPopularSong = () => {
     const [mostPopular, setMostPopular] = useState([]);
     const dispatch = useDispatch();
+    const [userData, setUserData] = useState();
+
 
 
     const getPopularPodcast = async () => {
@@ -25,6 +27,7 @@ const MostPopularSong = () => {
 
     useEffect(() => {
         getPopularPodcast();
+        getUser();
     }, [])
 
 
@@ -73,6 +76,19 @@ const MostPopularSong = () => {
     }
 
 
+    const getUser = async () => {
+        try {
+            const res = await axios.get(`${server}/profile/`, { withCredentials: true });
+            // console.log(res);
+            setUserData(res.data)
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
+
     return (
         <AppLayout>
             <div className='w-full h-full bg-[rgb(28,30,39)]  overflow-auto '>
@@ -81,7 +97,7 @@ const MostPopularSong = () => {
                     <div className=' grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
                         {
                             mostPopular?.map((data, index) => (
-                                <DashCard key={index} index={index} data={data} handleOpenPlayer={handleOpenPlayer} />
+                                <DashCard key={index} index={index} userData={userData} data={data} handleOpenPlayer={handleOpenPlayer} />
                             )
 
                             )}

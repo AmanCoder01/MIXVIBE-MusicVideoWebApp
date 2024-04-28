@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyToken } from "../middlewares/AuthMiddleware.js";
-import { addView, createContent, getByCategory, getContentById, getContents, mostpopular, mostpopularVideos } from "../controllers/content.controller.js";
+import { addView, createContent, favoritContent, getByCategory, getContentById, getContents, mostpopular, mostpopularVideos } from "../controllers/content.controller.js";
 
 
 const router = express.Router();
@@ -19,7 +19,7 @@ router.get("/get/:id", getContentById)
 // router.post("/episode",verifyToken, addepisodes);
 
 //favorit/unfavorit podcast
-// router.post("/favorit",verifyToken,favoritPodcast); 
+router.post("/favorite", verifyToken, favoritContent);
 
 //add view
 router.post("/addview/:id", addView);
