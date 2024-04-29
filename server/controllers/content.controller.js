@@ -154,3 +154,17 @@ export const deleteRecentPostById = async (req, res, next) => {
     }
 
 }
+
+
+
+export const search = async (req, res, next) => {
+    const query = req.query.q;
+    try {
+        const content = await Content.find({
+            name: { $regex: query, $options: "i" },
+        }).populate("creator", "name img").limit(40);
+        res.status(200).json(content);
+    } catch (err) {
+        next(err);
+    }
+};

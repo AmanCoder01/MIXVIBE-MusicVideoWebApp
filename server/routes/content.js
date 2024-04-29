@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyToken } from "../middlewares/AuthMiddleware.js";
-import { addView, createContent, deleteRecentPostById, favoritContent, getByCategory, mostpopularSongs, mostpopularVideos } from "../controllers/content.controller.js";
+import { addView, createContent, deleteRecentPostById, favoritContent, getByCategory, mostpopularSongs, mostpopularVideos, search } from "../controllers/content.controller.js";
 
 
 const router = express.Router();
@@ -17,6 +17,6 @@ router.delete("/delete/:id", verifyToken, deleteRecentPostById); //checked
 
 // router.get("/random", random)
 // router.get("/tags", getByTag)
-// router.get("/search", search)
+router.get("/search", search);
 
 export default router;
