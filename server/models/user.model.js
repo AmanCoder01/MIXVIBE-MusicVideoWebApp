@@ -35,7 +35,12 @@ const userSchema = new mongoose.Schema({
         ref: "Content",
         default: [],
     },
-    isAdmin: {
+    role: {
+        type: String,
+        enum: ["user", "admin", "artist"],
+        default: "user"
+    },
+    artistRequest: {
         type: Boolean,
         default: false
     }

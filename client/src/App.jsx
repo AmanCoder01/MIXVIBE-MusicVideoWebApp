@@ -13,13 +13,14 @@ import { useSelector } from "react-redux";
 import AudioPlayer from "./components/AudioPlayer";
 import MostPopularSong from "./pages/MostPopularSong";
 import PrivateRoute from "./components/PrivateRoute";
-import AdminPrivate from "./components/AdminPrivate";
 import MostPopularVideo from "./pages/MostPopularVideo";
 import { Modal } from "@mui/material";
 import VideoPlayer from "./components/VideoPlayer";
 import Search from "./pages/Search";
 import ShowSongCategory from "./pages/ShowSongCategory";
 import Favourites from "./pages/Favourites";
+import AdminArtistPrivate from "./components/AdminArtistPrivate";
+import ArtistApprove from "./pages/ArtistApprove";
 
 
 const Container = styled.div`
@@ -48,9 +49,9 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/verify" element={<VerifyOtp />} />
             <Route path="/upload" element={
-              <AdminPrivate>
+              <AdminArtistPrivate>
                 <Upload />
-              </AdminPrivate>
+              </AdminArtistPrivate>
             } />
             <Route path="/profile/:id" element={
               <PrivateRoute>
@@ -62,6 +63,7 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/showsongs/:category" element={<ShowSongCategory />} />
+            <Route path="/approve" element={<ArtistApprove />} />
 
           </Routes>
 

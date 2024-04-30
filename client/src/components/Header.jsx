@@ -4,11 +4,30 @@ import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { FaUser } from "react-icons/fa";
 import { setSidebar } from '../redux/slices/authSlice';
+import axios from "axios";
+import { server } from '../service/server';
+import toast from "react-hot-toast";
 
 
 const Header = () => {
     const { user, sidebar } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
+
+    const handleArtist = async () => {
+        try {
+            const res = await axios.post(`${server}/profile/sendrequest/${user?._id}`, { withCredentials: true });
+            if (res.status === 200) {
+                toast.success(res.data.message);
+            } else {
+                toast.error(res.data.message);
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message);
+
+        }
+    }
 
     return (
         <div className='w-full z-50 flex justify-between px-2 md:px-12 items-center py-[1rem]'>
@@ -21,9 +40,23 @@ const Header = () => {
             <div>
                 {
                     user ? (
-                        <Link to={`/profile/${user._id}`}>
-                            <img src={user.img} width={36} height={36} className='rounded-full' alt="" />
-                        </Link>
+
+
+                        <div className='flex items-center gap-8'>
+
+                            {user?.role === "user" &&
+
+                                <button className='border px-3 rounded-lg py-[0.2rem] text-[rgb(190,26,219)] border-[rgb(190,26,219)]' onClick={handleArtist}>Become Artist</button>
+                            }
+
+
+                            <Link to={`/profile/${user._id}`}>
+                                <img src={user.img} width={36} height={36} className='rounded-full' alt="" />
+                            </Link>
+
+                        </div>
+
+
                     ) :
                         (
                             <button className='border px-3 rounded-lg py-[0.2rem] text-[rgb(190,26,219)] border-[rgb(190,26,219)]'>

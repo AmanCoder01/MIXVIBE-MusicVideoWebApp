@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import { MdDelete } from "react-icons/md";
 import moment from "moment";
 import { RxCross2 } from "react-icons/rx";
+import { FaCrown } from "react-icons/fa";
 
 
 
@@ -74,7 +75,10 @@ const Profile = () => {
                         <img src={user?.img} alt="" className='h-[150px] rounded-full' />
 
                         <div>
-                            <h1 className='text-2xl'>{user?.name}</h1>
+                            <div className='relative'>
+                                <h1 className='text-2xl '>{user?.name} </h1>
+                                <p className='text-xs absolute top-[-6px] right-0 bg-red-500 p-[2px] rounded-xl px-3 flex  items-center gap-2'> {user?.role === "admin" && <FaCrown />}{user?.role}</p>
+                            </div>
                             <span>Email : <span className='text-[rgb(190,26,219)]'> {user?.email}</span></span>
                         </div>
                     </div>

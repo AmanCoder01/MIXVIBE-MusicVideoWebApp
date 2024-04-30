@@ -2,11 +2,11 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom';
 
-const AdminPrivate = ({ children }) => {
+const AdminArtistPrivate = ({ children }) => {
 
     const { user } = useSelector(state => state.auth);
 
-    if (user?.isAdmin) {
+    if (user?.role === "admin" || user?.role === "artist") {
         return children
     }
     else {
@@ -14,4 +14,4 @@ const AdminPrivate = ({ children }) => {
     }
 }
 
-export default AdminPrivate
+export default AdminArtistPrivate

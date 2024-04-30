@@ -5,12 +5,16 @@ import { createError } from "../middlewares/error.js";
 
 
 export const createContent = async (req, res, next) => {
+    if (!req.user.id) {
+        return res.status(401).send({ message: 'Unauthorized' });
+    }
+
     try {
         const user = await User.findById(req.user.id);
         if (!user) return res.status(401).send({ message: 'User not found ' });
 
-        if (user.isAdmin !== true) {
-            return res.status(403).send({ message: 'You are not admin.' });
+        if (user.role !== "admin" || user.role !== "artist") {
+            return res.status(403).send({ message: 'You are not allowed to upload content.' });
         }
 
         // Create a new content
@@ -140,6 +144,15 @@ export const deleteRecentPostById = async (req, res, next) => {
     }
 
     try {
+
+        const user = await User.findById(req.user.id);
+        if (!user) return res.status(401).send({ message: 'User not found ' });
+
+        if (user.role !== "admin" || user.role !== "artist") {
+            return res.status(403).send({ message: 'You are not allowed to upload content.' });
+        }
+
+
         const contents = await Content.findByIdAndDelete(id);
         if (!contents) return res.status(404).send({ message: 'No data' });
 

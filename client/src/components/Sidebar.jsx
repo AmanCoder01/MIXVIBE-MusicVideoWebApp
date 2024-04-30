@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { setUserProfile } from '../redux/slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { openPlayer } from '../redux/slices/audioPlayerSlice';
+import { FaUserClock } from "react-icons/fa";
 
 
 const Sidebar = () => {
@@ -77,10 +78,17 @@ const Sidebar = () => {
 
                 <div className='h-0 w-full border my-4 border-[rgba(177,178,179,0.314)]'></div>
 
-                {user?.isAdmin && <Link to="/upload" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/upload" && "bg-gray-800"}`}>
+                {(user?.role === "artist" || user?.role === "admin") && <Link to="/upload" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/upload" && "bg-gray-800"}`}>
                     <div className='px-4 flex items-center gap-4'>
                         <MdCloudUpload size={24} />
                         Upload
+                    </div>
+                </Link>}
+
+                {(user?.role === "admin") && <Link to="/approve" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/approve" && "bg-gray-800"}`}>
+                    <div className='px-4 flex items-center gap-4'>
+                        <FaUserClock size={22} />
+                        Artist Request
                     </div>
                 </Link>}
                 {user && <div className='hover:bg-gray-700  w-full py-4 text-lg cursor-pointer' onClick={handleLogout}>
