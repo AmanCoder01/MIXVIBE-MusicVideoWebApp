@@ -13,7 +13,7 @@ export const createContent = async (req, res, next) => {
         const user = await User.findById(req.user.id);
         if (!user) return res.status(401).send({ message: 'User not found ' });
 
-        if (user.role !== "admin" || user.role !== "artist") {
+        if ((user.role !== "admin") || (user.role !== "artist")) {
             return res.status(403).send({ message: 'You are not allowed to upload content.' });
         }
 
