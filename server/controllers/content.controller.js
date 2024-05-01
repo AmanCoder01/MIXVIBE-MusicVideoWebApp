@@ -13,29 +13,32 @@ export const createContent = async (req, res, next) => {
         const user = await User.findById(req.user.id);
         if (!user) return res.status(401).send({ message: 'User not found ' });
 
-        if ((user.role !== "admin") || (user.role !== "artist")) {
+        if (user.role !== "user") {
+
+            // Create a new content
+
+            const content = await Content.create({
+                creator: user.id,
+                name: req.body.name,
+                desc: req.body.desc,
+                img: req.body.img,
+                tags: req.body.tags,
+                type: req.body.type,
+                category: req.body.category,
+                file: req.body.file
+            });
+
+            //save the content to the user
+            await User.findByIdAndUpdate(user.id, {
+                $push: { contents: content.id },
+            }, { new: true });
+
+            res.status(200).json({ message: `${req.body.type} added successfully...`, data: content });
+
+        } else {
             return res.status(403).send({ message: 'You are not allowed to upload content.' });
         }
 
-        // Create a new content
-
-        const content = await Content.create({
-            creator: user.id,
-            name: req.body.name,
-            desc: req.body.desc,
-            img: req.body.img,
-            tags: req.body.tags,
-            type: req.body.type,
-            category: req.body.category,
-            file: req.body.file
-        });
-
-        //save the content to the user
-        await User.findByIdAndUpdate(user.id, {
-            $push: { contents: content.id },
-        }, { new: true });
-
-        res.status(200).json({ message: `${req.body.type} added successfully...`, data: content });
     } catch (err) {
         next(err);
     }
