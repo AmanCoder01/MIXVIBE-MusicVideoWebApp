@@ -31,7 +31,7 @@ const Header = () => {
 
     return (
         <div className='w-full z-50 flex justify-between px-2 md:px-12 items-center py-[1rem]'>
-            <button onClick={() => dispatch(setSidebar(!sidebar))} className='block md:hidden'>
+            <button onClick={() => dispatch(setSidebar(!sidebar))} className=''>
                 <IoMenuSharp size={28} />
             </button>
 
@@ -60,7 +60,7 @@ const Header = () => {
                     ) :
                         (
                             <button className='border px-3 rounded-lg py-[0.2rem] text-[rgb(190,26,219)] border-[rgb(190,26,219)]'>
-                                <Link to="/signin" className='flex items-center gap-2'>
+                                <Link to="/signin" className='flex  items-center gap-2'>
                                     <FaUser size={15} />
                                     Login</Link>
                             </button>

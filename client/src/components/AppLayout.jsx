@@ -9,21 +9,19 @@ const AppLayout = ({ children }) => {
 
     return (
         <div className='w-full h-screen flex items-center text-white' >
-            <div className={`h-full w-[60%] z-40 bg-[#15171E] md:w-[20%]  md:block  ${sidebar ? "absolute top-[3.6rem]" : "hidden"} `}>
+            <div className={`h-full  z-40 bg-[#15171E] ${sidebar ? "hidden" : "w-[20%]"}`}>
                 <Sidebar />
             </div>
 
 
-            <div className='flex flex-col justify-center  h-full w-full  md:w-[80%]'>
-                <div className='fixed z-50 top-0 w-full  md:w-[calc(100%-20%)] max-w-full h-[4rem]  bg-[rgb(28,30,39)]'>
+            <div className={`flex flex-col justify-center  h-full bg-[rgb(28,30,39)]  ${sidebar ? "w-full" : "w-[80%]"}`}>
+                <div className={`fixed z-50 top-0 h-[4rem]  ${sidebar ? "w-full" : "md:w-[calc(100%-20%)]"}`}>
                     <Header />
                 </div>
                 <div className='h-full  mt-12 '>
                     {children}
                 </div>
             </div>
-
-
 
         </div>
     )

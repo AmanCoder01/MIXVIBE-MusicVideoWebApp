@@ -29,7 +29,7 @@ const Profile = () => {
         setLoading(true);
         try {
             const res = await axios.get(`${server}/profile/${id}`, { withCredentials: true });
-
+            console.log(res);
             if (res.status === 200) {
                 setLoading(false);
                 setContentData(res.data.contents);

@@ -60,20 +60,20 @@ const DashCard = ({ index, data, handleOpenPlayer, userData }) => {
 
 
     return (
-        <div key={index} className='bg-black p-4 group rounded-md relative cursor-pointer hover:-translate-y-2 transition-all duration-300' >
+        <div key={index} className='bg-black text-gray-2 p-4 group rounded-md relative cursor-pointer hover:-translate-y-2 transition-all duration-300' >
             <div onClick={handleOpen}>
                 <img src={data.img} alt="" className='w-full h-[160px] object-fill rounded-md' />
                 <div className='pt-2'>
-                    <h1 className='text-lg'>{data.name}</h1>
-                    <p className='text-md'>{data.desc}</p>
+                    <h1 className='text-md mb-1'>{data.name.slice(0, 20)}</h1>
+                    <p className='text-sm '>{data?.desc.slice(0, 20)}</p>
                 </div>
                 <div className='pt-3 flex items-center justify-between'>
                     <div className='flex items-center gap-2'>
-                        <img src={data.creator.img} height={28} width={28} className='rounded-full' alt="" />
-                        <h1>{data.creator.name}</h1>
+                        <img src={data.creator.img} height={25} width={25} className='rounded-full' alt="" />
+                        <h1 className='text-sm'>{data.creator.name}</h1>
                     </div>
 
-                    <div className='text-sm'>
+                    <div className='text-xs'>
                         {data.views} views
                     </div>
                 </div>

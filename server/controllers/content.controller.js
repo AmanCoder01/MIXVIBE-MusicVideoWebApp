@@ -151,19 +151,20 @@ export const deleteRecentPostById = async (req, res, next) => {
         const user = await User.findById(req.user.id);
         if (!user) return res.status(401).send({ message: 'User not found ' });
 
-        if (user.role !== "admin" || user.role !== "artist") {
+        if (user.role === "admin" || user.role === "artist") {
+            const contents = await Content.findByIdAndDelete(id);
+            if (!contents) return res.status(404).send({ message: 'No data' });
+
+            const updatedUser = await User.findByIdAndUpdate(req.user.id, {
+                $pull: { contents: id },
+            }, { new: true });
+
+            return res.status(200).send({ message: "Content deleted !" });
+        } else {
             return res.status(403).send({ message: 'You are not allowed to upload content.' });
+
         }
 
-
-        const contents = await Content.findByIdAndDelete(id);
-        if (!contents) return res.status(404).send({ message: 'No data' });
-
-        const updatedUser = await User.findByIdAndUpdate(req.user.id, {
-            $pull: { contents: id },
-        }, { new: true });
-
-        return res.status(200).send({ message: "Content deleted !" });
 
     } catch (error) {
         next(error);

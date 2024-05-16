@@ -16,13 +16,11 @@ export const profileData = async (req, res, next) => {
     }
 
     try {
-        const user = await User.findById(req.user.id).populate({
-            path: "contents",
-            populate: {
-                path: "creator",
-                select: "name img",
+        const user = await User.findById(id).populate(
+            {
+                path: "contents",
+                options: { sort: { createdAt: -1 } }
             }
-        }
         ).populate(
             {
                 path: "favorites",
@@ -32,6 +30,9 @@ export const profileData = async (req, res, next) => {
                 }
             }
         );
+
+
+
         return res.status(200).json(user);
     } catch (err) {
         console.log(err)
