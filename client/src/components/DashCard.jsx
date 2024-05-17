@@ -62,7 +62,7 @@ const DashCard = ({ index, data, handleOpenPlayer, userData }) => {
     return (
         <div key={index} className='bg-black text-gray-2 p-4 group rounded-md relative cursor-pointer hover:-translate-y-2 transition-all duration-300' >
             <div onClick={handleOpen}>
-                <img src={data.img} alt="" className='w-full h-[160px] bject-contain rounded-md' />
+                <img src={data.img} alt="" className='w-full object-contain rounded-md' />
                 <div className='pt-2'>
                     <h1 className='text-md mb-1'>{data.name.slice(0, 20)}</h1>
                     <p className='text-sm '>{data?.desc.slice(0, 20)}</p>
