@@ -49,26 +49,23 @@ const Sidebar = () => {
     }
 
     return (
-        <div className=''>
-            <Link to="/" className='text-xl mb-3 p-4 text-[rgb(190,26,219)] flex items-center gap-2'>
-                <SiYoutubemusic size={30} />
-                MIXVIBE</Link>
+        <div className='mt-8 hidden md:block'>
 
             <div className='flex flex-col justify-center'>
                 <Link to="/" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/" && "bg-gray-800"}`}>
-                    <div className='px-4 flex items-center gap-4'>
+                    <div className='px-6 flex items-center gap-4'>
                         <MdHome size={24} />
                         <p>Dashboard</p>
                     </div>
                 </Link>
                 <Link to="/search" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/search" && "bg-gray-800"}`}>
-                    <div className='px-4 flex items-center gap-4'>
+                    <div className='px-6 flex items-center gap-4'>
                         <IoSearchSharp size={24} />
                         Search
                     </div>
                 </Link>
                 <Link to="/favourites" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/favourites" && "bg-gray-800"}`}>
-                    <div className='px-4 flex items-center gap-4'>
+                    <div className='px-6 flex items-center gap-4'>
                         <FaHeart size={20} />
                         Favourites
                     </div>
@@ -79,20 +76,20 @@ const Sidebar = () => {
                 <div className='h-0 w-full border my-4 border-[rgba(177,178,179,0.314)]'></div>
 
                 {(user?.role === "artist" || user?.role === "admin") && <Link to="/upload" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/upload" && "bg-gray-800"}`}>
-                    <div className='px-4 flex items-center gap-4'>
+                    <div className='px-6 flex items-center gap-4'>
                         <MdCloudUpload size={24} />
                         Upload
                     </div>
                 </Link>}
 
                 {(user?.role === "admin") && <Link to="/approve" className={`hover:bg-gray-700 w-full py-4 text-lg ${path === "/approve" && "bg-gray-800"}`}>
-                    <div className='px-4 flex items-center gap-4'>
+                    <div className='px-6 flex items-center gap-4'>
                         <FaUserClock size={22} />
                         Artist Request
                     </div>
                 </Link>}
                 {user && <div className='hover:bg-gray-700  w-full py-4 text-lg cursor-pointer' onClick={handleLogout}>
-                    <div className='px-4 flex items-center gap-4'>
+                    <div className='px-6 flex items-center gap-4'>
                         <IoLogOutOutline size={24} />
                         Logout
                     </div>

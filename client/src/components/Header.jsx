@@ -7,6 +7,7 @@ import { setSidebar } from '../redux/slices/authSlice';
 import axios from "axios";
 import { server } from '../service/server';
 import toast from "react-hot-toast";
+import { SiYoutubemusic } from 'react-icons/si';
 
 
 const Header = () => {
@@ -30,12 +31,17 @@ const Header = () => {
     }
 
     return (
-        <div className='w-full z-50 flex justify-between px-2 md:px-12 items-center py-[1rem]'>
-            <button onClick={() => dispatch(setSidebar(!sidebar))} className=''>
+        <div className='w-full z-50 flex justify-between px-2 md:px-8 items-center py-[1rem]'>
+            {/* <button onClick={() => dispatch(setSidebar(!sidebar))} className=''>
                 <IoMenuSharp size={28} />
-            </button>
+            </button> */}
 
-            {user && <h1 className='text-md md:text-xl font-semibold'>Welcome , {user.name}</h1>}
+            <Link to="/" className='text-xl text-[rgb(190,26,219)] flex items-center gap-2'>
+                <SiYoutubemusic size={30} />
+                MIXVIBE
+            </Link>
+
+            {user && <h1 className='text-md md:text-xl font-semibold hidden md:block'>Welcome , {user.name}</h1>}
 
             <div>
                 {

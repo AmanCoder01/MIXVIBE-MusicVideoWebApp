@@ -113,7 +113,7 @@ const Upload = () => {
                             </div>
 
                             <div>
-                                <textarea type="text" placeholder='Description' className='p-3 w-full rounded-lg px-4 outline-none bg-[rgb(28,30,39)]' name="desc"
+                                <textarea type="text" placeholder='Artist Name' className='p-3 w-full rounded-lg px-4 outline-none bg-[rgb(28,30,39)]' name="desc"
                                     value={podcast?.desc}
                                     onChange={(e) => handleInputState("desc", e.target.value)} />
                             </div>

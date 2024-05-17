@@ -78,7 +78,7 @@ const Favourites = () => {
                 <div className='py-6 md:py-9 px-7 md:px-12 my-6 mb-14'>
                     <h1 className='text-xl font-semibold'>Favourites</h1>
 
-                    <div className=' grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
+                    <div className=' grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  gap-4 mt-6'>
                         {
                             userData?.favorites?.slice(0, 8).map((data, index) => {
                                 return <DashCard index={index} key={index} userData={userData} data={data} handleOpenPlayer={handleOpenPlayer} />

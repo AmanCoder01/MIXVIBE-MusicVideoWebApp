@@ -123,9 +123,9 @@ const Dashboard = () => {
                             loading ? <p className="loader    mx-auto w-full flex justify-center items-center my-12"></p> :
                                 mostPopular?.length === 0 && !loading ? <h1 className='my-8 text-center text-xl'>Songs not Available</h1> :
 
-                                    <div className=' grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6'>
+                                    <div className=' grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5   gap-4 mt-6'>
                                         {
-                                            mostPopular?.slice(0, 8).map((data, index) => {
+                                            mostPopular?.slice(0, 10).map((data, index) => {
                                                 return <DashCard index={index} key={index} userData={userData} data={data} handleOpenPlayer={handleOpenPlayer} />
                                             })
                                         }
