@@ -9,23 +9,26 @@ export const createContent = async (req, res, next) => {
         return res.status(401).send({ message: 'Unauthorized' });
     }
 
+    const { name, artist, img, type, category, file } = req.body;
+
+    if (!name || !artist || !img || !type || !category || !file) {
+        return res.status(401).send({ message: 'Please fill all the fields' });
+    }
+
     try {
         const user = await User.findById(req.user.id);
+
         if (!user) return res.status(401).send({ message: 'User not found ' });
 
         if (user.role !== "user") {
-
-            // Create a new content
-
             const content = await Content.create({
                 creator: user.id,
-                name: req.body.name,
-                desc: req.body.desc,
-                img: req.body.img,
-                tags: req.body.tags,
-                type: req.body.type,
-                category: req.body.category,
-                file: req.body.file
+                name: name,
+                artist: artist,
+                img: img,
+                type: type,
+                category: category,
+                file: file
             });
 
             //save the content to the user
@@ -33,7 +36,7 @@ export const createContent = async (req, res, next) => {
                 $push: { contents: content.id },
             }, { new: true });
 
-            res.status(200).json({ message: `${req.body.type} added successfully...`, data: content });
+            res.status(200).json({ message: `${type === "audio" ? "Song" : "Video"} added successfully...`, data: content });
 
         } else {
             return res.status(403).send({ message: 'You are not allowed to upload content.' });
@@ -43,6 +46,32 @@ export const createContent = async (req, res, next) => {
         next(err);
     }
 };
+
+
+
+export const mostpopularSongs = async (req, res, next) => {
+    try {
+        const content = await Content.find({ type: "audio" }).sort({ views: -1 }).populate("creator", "name img");
+        res.status(200).json(content);
+    } catch (err) {
+        next(err);
+    }
+};
+
+
+
+export const mostpopularVideos = async (req, res, next) => {
+    try {
+        const content = await Content.find({ type: "video" }).sort({ views: -1 }).populate("creator", "name img");
+        res.status(200).json(content);
+    } catch (err) {
+        next(err);
+    }
+};
+
+
+
+
 
 
 export const getByCategory = async (req, res, next) => {
@@ -117,24 +146,6 @@ export const addView = async (req, res, next) => {
 };
 
 
-export const mostpopularSongs = async (req, res, next) => {
-    try {
-        const content = await Content.find({ type: "audio" }).sort({ views: -1 }).populate("creator", "name img");
-        res.status(200).json(content);
-    } catch (err) {
-        next(err);
-    }
-};
-
-
-export const mostpopularVideos = async (req, res, next) => {
-    try {
-        const content = await Content.find({ type: "video" }).sort({ views: -1 }).populate("creator", "name img");
-        res.status(200).json(content);
-    } catch (err) {
-        next(err);
-    }
-};
 
 
 

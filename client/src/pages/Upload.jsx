@@ -9,41 +9,39 @@ import axios from 'axios';
 
 const Upload = () => {
     const [disabled, setDisabled] = useState(true);
-    const [podcast, setPodcast] = useState({
+    const [content, setContent] = useState({
         name: "",
-        desc: "",
+        artist: "",
         img: "",
-        tags: [],
         category: "Select Category",
         type: "audio",
         file: ""
     });
 
+
     const handleInputState = (name, value) => {
-        // console.log(name, value);
-        setPodcast((prev) => ({ ...prev, [name]: value }));
+        setContent((prev) => ({ ...prev, [name]: value }));
     };
 
 
+
     useEffect(() => {
-        if (podcast === null) {
+        if (content === null) {
             setDisabled(true);
-            setPodcast({
+            setContent({
                 name: "",
-                desc: "",
+                artist: "",
                 img: "",
                 file: "",
-                tags: [],
             });
         } else {
-            if (podcast.name === "" || podcast.desc === "" || podcast.img === "" || podcast.file === "") {
+            if (content.name === "" || content.artist === "" || content.img === "" || content.file === "") {
                 setDisabled(true);
             } else {
                 setDisabled(false);
             }
         }
-    }, [podcast]);
-
+    }, [content]);
 
 
 
@@ -51,20 +49,18 @@ const Upload = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post(`${server}/content/create`, podcast, {
+            const res = await axios.post(`${server}/content/create`, content, {
                 withCredentials: true,
             });
 
             console.log(res);
 
-
             if (res.status === 200) {
                 toast.success(res.data.message);
-                setPodcast({
+                setContent({
                     name: "",
-                    desc: "",
+                    artist: "",
                     img: "",
-                    tags: [],
                     category: "Select Category",
                     type: "audio",
                     file: ""
@@ -80,11 +76,13 @@ const Upload = () => {
     };
 
 
+
+
     return (
         <AppLayout>
             <div className='w-full h-full bg-[rgb(28,30,39)] overflow-auto'>
-                <div className='py-10 mb-20'>
-                    <div className='max-w-xl s bg-black mx-auto p-8 rounded-lg'>
+                <div className='py-10 mb-10'>
+                    <div className='max-w-xl  bg-black mx-auto p-8 rounded-lg'>
                         <h1 className='text-center text-xl font-bold'>Upload Content</h1>
                         <p className='py-4'>Content Details:</p>
 
@@ -93,7 +91,7 @@ const Upload = () => {
                                 label="Choose image..."
                                 type="image"
                                 name="img"
-                                value={podcast.img}
+                                value={content.img}
                                 handleInputState={handleInputState}
                             />
 
@@ -101,33 +99,28 @@ const Upload = () => {
                                 label="Choose Audio / Video..."
                                 type="file"
                                 name="file"
-                                value={podcast.file}
+                                value={content.file}
                                 handleInputState={handleInputState}
                             />
 
 
-
                             <div>
-                                <input type="text" name='name' placeholder='Name' className='p-3 w-full rounded-lg outline-none px-4 bg-[rgb(28,30,39)]' value={podcast?.name}
+                                <input type="text" name='name' placeholder='Song / Video Name' className='p-3 w-full rounded-lg outline-none px-4 bg-[rgb(28,30,39)]' value={content?.name}
                                     onChange={(e) => handleInputState("name", e.target.value)} />
                             </div>
 
                             <div>
-                                <textarea type="text" placeholder='Artist Name' className='p-3 w-full rounded-lg px-4 outline-none bg-[rgb(28,30,39)]' name="desc"
-                                    value={podcast?.desc}
-                                    onChange={(e) => handleInputState("desc", e.target.value)} />
+                                <input type="text" placeholder='Artist Name' className='p-3 w-full rounded-lg px-4 outline-none bg-[rgb(28,30,39)]' name="artist"
+                                    value={content?.artist}
+                                    onChange={(e) => handleInputState("artist", e.target.value)} />
                             </div>
 
-                            <div>
-                                <textarea type="text" placeholder='Tags seperated by ,' className='p-3 w-full rounded-lg px-4 outline-none bg-[rgb(28,30,39)]' name="tags"
-                                    value={podcast?.tags}
-                                    onChange={(e) => setPodcast({ ...podcast, tags: e.target.value.split(",") })} />
-                            </div>
+
 
                             <div className='flex justify-between items-center gap-4'>
                                 <select className='w-1/3 p-3 bg-[rgb(28,30,39)] outline-none rounded-lg'
                                     name='type'
-                                    value={podcast?.type}
+                                    value={content?.type}
                                     onChange={
                                         (e) => handleInputState("type", e.target.value)
                                     }>
@@ -138,15 +131,15 @@ const Upload = () => {
 
                                 <select className='w-2/3 p-3 bg-[rgb(28,30,39)] outline-none rounded-lg'
                                     name='category'
-                                    value={podcast?.category}
+                                    value={content?.category}
                                     onChange={
                                         (e) => handleInputState("category", e.target.value)
                                     }>
                                     <option disabled hidden>Select Category</option>
-                                    {podcast?.type === "video" && Category.map((category, index) => (
+                                    {content?.type === "video" && Category.map((category, index) => (
                                         <option key={index} value={category.name}>{category.name}</option>
                                     ))}
-                                    {podcast?.type === "audio" && SongCategory.map((category, index) => (
+                                    {content?.type === "audio" && SongCategory.map((category, index) => (
                                         <option key={index} value={category.name}>{category.name}</option>
                                     ))}
                                 </select>

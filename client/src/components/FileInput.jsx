@@ -68,7 +68,7 @@ const FileInput = ({
         <div className='border z-10 h-[8rem] rounded-2xl gap-2 border-dashed flex flex-col justify-center items-center bg-[rgb(28,30,39)] relative'>
 
             {!value && <MdCloudUpload size={40} />}
-            {!value && <input type="file" name="thumbnail" id={name} className='hidden'
+            {!value && <input type="file" accept={`${type === "image" ? "image/*" : "audio/*"}`} name="thumbnail" id={name} className='hidden'
                 {...rest}
                 onChange={(e) => handleInputState(name, e.currentTarget.files[0])}
             />}

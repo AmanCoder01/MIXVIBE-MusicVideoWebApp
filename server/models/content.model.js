@@ -5,7 +5,7 @@ const contentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    desc: {
+    artist: {
         type: String,
         required: true,
     },
@@ -21,10 +21,6 @@ const contentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
-    },
-    tags: {
-        type: [String],
-        default: [],
     },
     type: {
         type: String,
