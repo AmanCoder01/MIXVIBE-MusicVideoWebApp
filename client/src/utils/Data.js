@@ -96,3 +96,33 @@ export const SongCategory = [
     },
 
 ]
+
+
+
+export const artistsData = [
+    {
+        id: 1,
+        name: "Darshan Raval",
+        image: "/src/assets/darshan.jpeg"
+    },
+    {
+        id: 2,
+        name: "Jubin Nautiyal",
+        image: "/src/assets/jubin.jpg"
+    },
+    {
+        id: 3,
+        name: "Arijit Singh",
+        image: "/src/assets/arigit.jpg"
+    },
+    {
+        id: 4,
+        name: "Sonu Nigam",
+        image: "/src/assets/sonu.jpg"
+    },
+    {
+        id: 5,
+        name: "Shreya Ghoshal",
+        image: "/src/assets/shreya.jpg"
+    },
+];

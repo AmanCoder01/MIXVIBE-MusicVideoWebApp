@@ -60,12 +60,13 @@ const DashCard = ({ index, data, handleOpenPlayer, userData }) => {
 
 
     return (
-        <div key={index} className='bg-black text-gray-2 p-4 group rounded-md relative cursor-pointer hover:-translate-y-2 transition-all duration-300' >
+        <div key={index} className='hover:bg-gray-950 bg-gray-900 text-gray-2 p-4 group rounded-md relative cursor-pointer hover:-translate-y-2 transition-all duration-300' >
             <div onClick={handleOpen}>
                 <img src={data.img} alt="" className='w-full object-contain rounded-md' />
                 <div className='pt-2'>
-                    <h1 className='text-md mb-1'>{data.name.slice(0, 20)}</h1>
-                    <p className='text-sm '>{data?.artist.slice(0, 20)}</p>
+                    <h1 className='text-md mb-1'>{data?.name.length > 10 ? data.name.slice(0, 10) + "..." : data.name}</h1>
+
+                    <p className='text-sm '>{data?.artist.slice(0, 15)}</p>
                 </div>
                 <div className='pt-3 flex items-center justify-between'>
                     <div className='flex items-center gap-2'>
@@ -79,7 +80,7 @@ const DashCard = ({ index, data, handleOpenPlayer, userData }) => {
                 </div>
 
                 <div className='hidden group-hover:block absolute right-[1.5rem] top-[10rem] p-3 bg-[rgb(190,26,219)]  rounded-full transition-all ease-in-out duration-700 shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]'>
-                    {data.type === "audio" ? <FaHeadphones size={24} /> : <FaPlay size={24} />}
+                    {data.type === "audio" ? <FaHeadphones size={24} color='#232323' /> : <FaPlay size={24} />}
                 </div>
 
             </div>

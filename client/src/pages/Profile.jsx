@@ -101,7 +101,7 @@ const Profile = () => {
                                                 <img src={item?.img} alt="" className='h-full w-[50px] md:h-[80px] md:w-[80px] rounded-md' />
                                                 <div className='flex flex-col justify-center '>
                                                     <h1 className='text-lg md:text-xl'>{item?.name.slice(0, 10)}...</h1>
-                                                    <h1 className='text-sm md:text-md'>{item?.desc.slice(0, 10)}</h1>
+                                                    <h1 className='text-sm md:text-md'>{item?.artist.slice(0, 10)}</h1>
                                                     <span className='text-[0.7rem] md:text-sm text-gray-300'>Views: {item?.views}</span>
                                                 </div>
                                             </div>

@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { openPlayer } from '../redux/slices/audioPlayerSlice';
 import DashCard from '../components/DashCard';
 import { Link } from 'react-router-dom';
+import { artistsData } from '../utils/Data';
+import { IoMdPlayCircle } from "react-icons/io";
 
 
 
@@ -112,6 +114,38 @@ const Dashboard = () => {
         <AppLayout>
             <div className='w-full h-full bg-[rgb(28,30,39)]  overflow-auto '>
                 <div className='py-6 md:py-9 px-7 md:px-12 my-6'>
+
+
+                    <div className='mb-12'>
+                        <div >
+                            <h1 className='text-xl md:text-xl font-bold'>Recommended Artist Station</h1>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 space-x-4 space-y-6">
+                            {artistsData?.map((i, index) => (
+                                <Link
+                                    to={`/artists/${i.name}`}
+                                    key={index}
+                                    className="rounded-lg py-3 px-3 ms-4 mt-4 cursor-pointer hover:bg-gray-950 bg-gray-900"
+                                    id="artistLink"
+                                >
+                                    <div className="relative">
+                                        <img
+                                            src={i.image}
+                                            alt={`Image of ${i.name}`}
+                                            className="rounded-full object-contain"
+                                        />
+                                        <IoMdPlayCircle
+                                            size={45}
+                                            color="rgb(190,26,219)"
+                                            className="absolute sm:right-0 sm:bottom-0 -right-0.5 -bottom-0.5 bg-[#232323] rounded-full playBtn"
+                                        />
+                                    </div>
+                                    <p className="text-lg font-semibold opacity-90 py-2">{i.name}</p>
+                                    <p className="text-sm italic opacity-90">Artist</p>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
 
 
                     <div className='mb-12'>
