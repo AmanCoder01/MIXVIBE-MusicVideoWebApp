@@ -8,6 +8,7 @@ import DashCard from '../components/DashCard';
 import { Link } from 'react-router-dom';
 
 
+
 const Dashboard = () => {
     const [mostPopular, setMostPopular] = useState([]);
     const [mostPopularVideo, setMostPopularVideo] = useState([]);
@@ -125,7 +126,7 @@ const Dashboard = () => {
 
                                     <div className=' grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3  md:gap-5 mt-6'>
                                         {
-                                            mostPopular?.slice(0, 10).map((data, index) => {
+                                            mostPopular?.slice(0, 5).map((data, index) => {
                                                 return <DashCard index={index} key={index} userData={userData} data={data} handleOpenPlayer={handleOpenPlayer} />
                                             })
                                         }

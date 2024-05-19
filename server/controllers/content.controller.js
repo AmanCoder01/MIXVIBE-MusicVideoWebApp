@@ -15,6 +15,10 @@ export const createContent = async (req, res, next) => {
         return res.status(401).send({ message: 'Please fill all the fields' });
     }
 
+    if (typeof file !== "string") {
+        return res.status(401).send({ message: 'Please wait few seconds !' });
+    }
+
     try {
         const user = await User.findById(req.user.id);
 

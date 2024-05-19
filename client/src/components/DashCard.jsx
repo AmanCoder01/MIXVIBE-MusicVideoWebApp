@@ -65,7 +65,7 @@ const DashCard = ({ index, data, handleOpenPlayer, userData }) => {
                 <img src={data.img} alt="" className='w-full object-contain rounded-md' />
                 <div className='pt-2'>
                     <h1 className='text-md mb-1'>{data.name.slice(0, 20)}</h1>
-                    <p className='text-sm '>{data?.desc.slice(0, 20)}</p>
+                    <p className='text-sm '>{data?.artist.slice(0, 20)}</p>
                 </div>
                 <div className='pt-3 flex items-center justify-between'>
                     <div className='flex items-center gap-2'>

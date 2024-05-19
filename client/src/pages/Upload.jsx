@@ -48,12 +48,14 @@ const Upload = () => {
     const handleSave = async (e) => {
         e.preventDefault();
 
+
+
         try {
             const res = await axios.post(`${server}/content/create`, content, {
                 withCredentials: true,
             });
 
-            console.log(res);
+            // console.log(res);
 
             if (res.status === 200) {
                 toast.success(res.data.message);
