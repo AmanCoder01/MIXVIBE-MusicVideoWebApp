@@ -80,9 +80,9 @@ const ShowSongCategory = () => {
         <AppLayout>
             <div className='w-full h-full bg-[rgb(28,30,39)]  overflow-auto '>
                 <div className='py-6 md:py-9 px-7 md:px-12 my-6 mb-14'>
-                    <h1 className='text-xl font-semibold'>{category.toUpperCase()}</h1>
+                    <h1 className='text-xl font-semibold'>{category.substring(0, 1).toUpperCase() + category.substring(1, category.length)}</h1>
 
-                    <div className=' grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6'>
+                    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3  md:gap-5 mt-6'>
                         {
                             categoryData?.map((data, index) => {
                                 return <DashCard index={index} key={index} data={data} handleOpenPlayer={handleOpenPlayer} />

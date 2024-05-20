@@ -140,12 +140,12 @@ const Search = () => {
 
                                     <div className='flex flex-wrap gap-6 mt-6 mx-auto  items-center overflow-hidden '>
                                         {SongCategory.map((category, index) => (
-                                            <Link to={`/ showsongs / ${category.name.toLowerCase()}`} key={index} style={{ textDecoration: "none" }}>
+                                            <Link to={`/showsongs/${category.name.toLowerCase()}`} key={index} style={{ textDecoration: "none" }}>
                                                 <DefaultCard category={category} />
                                             </Link>
                                         ))}
                                         {Category.map((category, index) => (
-                                            <Link to={`/ showvideos / ${category.name.toLowerCase()}`} key={index} style={{ textDecoration: "none" }}>
+                                            <Link to={`/showvideos/ ${category.name.toLowerCase()}`} key={index} style={{ textDecoration: "none" }}>
                                                 <DefaultCard category={category} />
                                             </Link>
                                         ))}

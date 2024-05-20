@@ -103,26 +103,26 @@ export const artistsData = [
     {
         id: 1,
         name: "Darshan Raval",
-        image: "/src/assets/darshan.jpeg"
+        image: "darshan.jpeg"
     },
     {
         id: 2,
         name: "Jubin Nautiyal",
-        image: "/src/assets/jubin.jpg"
+        image: "jubin.jpg"
     },
     {
         id: 3,
         name: "Arijit Singh",
-        image: "/src/assets/arigit.jpg"
+        image: "arigit.jpg"
     },
     {
         id: 4,
         name: "Sonu Nigam",
-        image: "/src/assets/sonu.jpg"
+        image: "sonu.jpg"
     },
     {
         id: 5,
         name: "Shreya Ghoshal",
-        image: "/src/assets/shreya.jpg"
+        image: "shreya.jpg"
     },
 ];
