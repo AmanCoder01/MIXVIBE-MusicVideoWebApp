@@ -29,7 +29,7 @@ const Profile = () => {
         setLoading(true);
         try {
             const res = await axios.get(`${server}/profile/${id}`, { withCredentials: true });
-            console.log(res);
+            // console.log(res);
             if (res.status === 200) {
                 setLoading(false);
                 setContentData(res.data.contents);
@@ -70,7 +70,7 @@ const Profile = () => {
     return (
         <AppLayout>
             <div className={`w-full h-full bg-[rgb(28,30,39)]  overflow-auto  relative ${modal?.isOpen && "bg-opacity-20 overflow-hidden"}`}>
-                <div className='p-6 md:p-8 my-10'>
+                <div className='p-6 md:p-8 mt-10'>
                     <div className='flex items-center gap-6 flex-wrap'>
                         <img src={user?.img} alt="" className='h-[150px] rounded-full' />
 
@@ -87,11 +87,11 @@ const Profile = () => {
                     <div className='border my-8 border-gray-700'></div>
 
 
-                    <div>
+                    <div className='h-screen'>
                         <h1 className='text-xl'>Your Uploads</h1>
 
 
-                        <div className='my-8 flex flex-col gap-4'>
+                        <div className='my-8 flex flex-col gap-4 overflow-auto h-[80%] border-gray-500 border-2 rounded-lg'>
                             {loading ? <p className="loader    mx-auto w-full flex justify-center items-center my-12"></p> :
                                 contentData?.length === 0 ?
                                     <span className="text-white text-center">No uploads yet!</span> :
@@ -120,30 +120,33 @@ const Profile = () => {
                         </div>
 
 
-                        {modal?.isOpen &&
-                            <div className='absolute left-0 right-0 mx-auto  top-[12rem] max-w-sm w-full bg-black h-[180px] p-4 rounded-xl z-50'>
-                                <div className='flex justify-end cursor-pointer w-full text-right' onClick={() => setModal({
-                                    isOpen: false,
-                                    id: ""
-                                })}>
-                                    <RxCross2 color='white' size={24} />
-                                </div>
-                                <div className='px-6'>
-                                    <h1 className='my-6 text-lg font-normal' >Are  you sure ,You want to delete?</h1>
 
-                                    <div className='flex items-center justify-between'>
-                                        <button className='bg-[rgb(190,26,219)] py-1 px-2 rounded-md' onClick={() => setModal({
-                                            isOpen: false,
-                                            id: ""
-                                        })}>Cancel</button>
-                                        <button className='bg-[rgb(190,26,219)] py-1 px-2 rounded-md' onClick={() => handleConfirm(modal.id)}>Yes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        }
 
                     </div>
                 </div>
+
+
+                {modal?.isOpen &&
+                    <div className='absolute top-[50%] h-[200px]  right-[50%] translate-x-52 duration-300 transition-all bg-black w-[400px] p-4 rounded-xl z-50'>
+                        <div className='flex justify-end cursor-pointer w-full text-right' onClick={() => setModal({
+                            isOpen: false,
+                            id: ""
+                        })}>
+                            <RxCross2 color='white' size={24} />
+                        </div>
+                        <div className='px-6'>
+                            <h1 className='my-6 text-lg font-normal' >Are  you sure ,You want to delete?</h1>
+
+                            <div className='flex items-center justify-between'>
+                                <button className='bg-[rgb(190,26,219)] py-1 px-2 rounded-md' onClick={() => setModal({
+                                    isOpen: false,
+                                    id: ""
+                                })}>Cancel</button>
+                                <button className='bg-[rgb(190,26,219)] py-1 px-2 rounded-md' onClick={() => handleConfirm(modal.id)}>Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
 
         </AppLayout>

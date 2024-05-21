@@ -92,6 +92,24 @@ export const getByCategory = async (req, res, next) => {
 };
 
 
+export const getByArtistName = async (req, res, next) => {
+    try {
+        const { name } = req.params;
+
+        const content = await Content.find({
+            artist: { $regex: name, $options: "i" },
+        }).populate("creator", "name img");
+
+        return res.status(200).json(content);
+    } catch (err) {
+        console.log(err);
+        next(err);
+    }
+};
+
+
+
+
 export const favoritContent = async (req, res, next) => {
 
     if (!req.user.id) {
@@ -138,6 +156,7 @@ export const favoritContent = async (req, res, next) => {
 }
 
 
+
 export const addView = async (req, res, next) => {
     try {
         await Content.findByIdAndUpdate(req.params.id, {
@@ -176,7 +195,7 @@ export const deleteRecentPostById = async (req, res, next) => {
 
             return res.status(200).send({ message: "Content deleted !" });
         } else {
-            return res.status(403).send({ message: 'You are not allowed to upload content.' });
+            return res.status(403).send({ message: 'You are not allowed to delete content.' });
 
         }
 

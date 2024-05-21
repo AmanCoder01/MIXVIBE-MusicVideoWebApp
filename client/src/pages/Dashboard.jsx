@@ -116,14 +116,15 @@ const Dashboard = () => {
                 <div className='py-6 md:py-9 px-7 md:px-12 my-6'>
 
 
-                    <div className='mb-12'>
+                    <div className='mb-12 '>
                         <div >
                             <h1 className='text-xl md:text-xl font-bold'>Recommended Artist Station</h1>
                         </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 space-x-4 space-y-6">
+
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  mt-4">
                             {artistsData?.map((i, index) => (
                                 <Link
-                                    to={`/artists/${i.name}`}
+                                    to={`/artist/${i.name}`}
                                     key={index}
                                     className="rounded-lg py-3 px-3 ms-4 mt-4 cursor-pointer hover:bg-gray-950 bg-gray-900"
                                     id="artistLink"

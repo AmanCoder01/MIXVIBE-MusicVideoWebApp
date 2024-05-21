@@ -21,6 +21,7 @@ import ShowSongCategory from "./pages/ShowSongCategory";
 import Favourites from "./pages/Favourites";
 import AdminArtistPrivate from "./components/AdminArtistPrivate";
 import ArtistApprove from "./pages/ArtistApprove";
+import SongByArtist from "./pages/SongByArtist";
 
 
 const Container = styled.div`
@@ -64,6 +65,7 @@ function App() {
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/showsongs/:category" element={<ShowSongCategory />} />
             <Route path="/approve" element={<ArtistApprove />} />
+            <Route path="/artist/:name" element={<SongByArtist />} />
 
           </Routes>
 
